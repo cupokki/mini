@@ -40,10 +40,15 @@ public class BoardController {
     /** 상세보기 */
     @GetMapping("/boards/{seq}")
     public String view(
-            @RequestParam Long seq,
+            @PathVariable Long seq,
             Model model){
         Board board = service.getBoardById(seq);
         model.addAttribute("post", board);
         return "board/view";
+    }
+
+    @GetMapping("/boards/create")
+    public String create() {
+        return "board/create";
     }
 }

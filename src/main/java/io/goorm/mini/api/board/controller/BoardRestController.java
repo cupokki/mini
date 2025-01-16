@@ -27,7 +27,8 @@ public class BoardRestController {
         return "api index";
     }
 
-    /** 리스트 */
+
+    /** get board list */
     @GetMapping("/boards")
     public List<Board> list() {
         List<Board> result = boardService.getBoards();
@@ -37,13 +38,28 @@ public class BoardRestController {
         return result;
     }
 
-    /** 상세보기 */
+    /** get board by id */
     @GetMapping("/boards/{seq}")
-    public Board detail(@PathVariable("seq") Long seq) {
+    public Board board(@PathVariable Long seq) {
         Board result = boardService.getBoardById(seq);
         return result;
     }
-//
+
+    /** create board */
+    @PostMapping("/boards")
+    public int post(
+            @RequestParam String title,
+            @RequestParam String contents,
+            @RequestParam String regUser
+    ) {
+//        Board board = new Board();
+//        board.setTitle("test");
+        Board board = new Board();
+        // board 값 set
+        return boardService.createBoard(board);
+    }
+
+    /** update board */
 //    @PostMapping("/boards")
 //    public int post(@RequestBody Long seq) {
 //        //

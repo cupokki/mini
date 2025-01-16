@@ -23,8 +23,8 @@ public class BoardService {
     }
 
     /** 아이디로 검색 */
-    public Board getBoardById(Long seq) {
-        return mapper.selectbyId(seq);
+    public Board getBoardById(long seq) {
+        return mapper.selectById(seq);
     }
 
     /** 생성 */

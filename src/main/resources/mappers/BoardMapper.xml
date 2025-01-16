@@ -10,8 +10,9 @@
         ORDER BY seq desc
     </select>
 
-    <select id="selectById" parameterType="long" resultType="io.goorm.mini.board.model.Board">
-        SELECT * FROM board WHERE seq = #{seq}
+    <select id="selectById" parameterType="Long" resultType="io.goorm.mini.board.model.Board">
+        SELECT * FROM board
+        WHERE seq = #{seq}
     </select>
 
     <!-- INSERT -->
@@ -28,7 +29,7 @@
     </update>
 
     <!-- DELETE -->
-    <delete id="delete" parameterType="long">
+    <delete id="delete" parameterType="Long">
         DELETE FROM board WHERE seq = #{seq}
     </delete>
 

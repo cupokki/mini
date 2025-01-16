@@ -11,11 +11,11 @@ public interface BoardMapper {
 
     List<Board> selectAll();
 
-    Board selectbyId(@Param("seq") long seq);
+    Board selectById(@Param("seq") Long seq);
 
     int insert(@Param("board") Board board);
 
     int update(@Param("board") Board board);
 
-    int delete(@Param("board") long seq);
+    int delete(@Param("board") Long seq);
 }
