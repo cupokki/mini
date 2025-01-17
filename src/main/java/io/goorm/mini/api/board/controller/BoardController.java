@@ -5,10 +5,7 @@ import io.goorm.mini.board.model.Board;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -47,8 +44,26 @@ public class BoardController {
         return "board/view";
     }
 
-    @GetMapping("/boards/create")
-    public String create() {
-        return "board/create";
+    /** 생성 */
+    @PostMapping("/boards")
+    public String create(@ModelAttribute Board board, Model model) {
+        var result = service.createBoard(board);
+//        model.addAttribute("", result);
+//        return "board/create";
+        return "redirect:/board/create";
     }
+
+    /** 수정 페이지*/
+    @GetMapping("/boards/update/{seq}")
+    public String update(@PathVariable Long seq, Model model) {
+        model.addAttribute("post", service.getBoardById(seq));
+        return "board/update";
+    }
+
+    @PutMapping("/boards")
+    public String put(@RequestBody Board board, Model model) {
+        service.updateBoard(board);
+        return "redirect:/list";
+    }
+
 }

@@ -14,24 +14,17 @@ import java.util.List;
 @RequestMapping("/api")
 public class BoardRestController {
 
+    private final BoardService service;
+
     @Autowired
-    private BoardService boardService;
-
-//    @Autowired
-//    public BoardRestController(BoardService boardService) {
-//        this.boardService = boardService;
-//    }
-
-    @GetMapping("")
-    public String index() {
-        return "api index";
+    public BoardRestController(BoardService boardService) {
+        this.service = boardService;
     }
-
 
     /** get board list */
     @GetMapping("/boards")
     public List<Board> list() {
-        List<Board> result = boardService.getBoards();
+        List<Board> result = service.getBoards();
 
 //        log.debug("list size : " + result.size());
 //        log.debug("test");
@@ -41,31 +34,32 @@ public class BoardRestController {
     /** get board by id */
     @GetMapping("/boards/{seq}")
     public Board board(@PathVariable Long seq) {
-        Board result = boardService.getBoardById(seq);
+        Board result = service.getBoardById(seq);
         return result;
     }
 
     /** create board */
     @PostMapping("/boards")
     public int post(
-            @RequestParam String title,
-            @RequestParam String contents,
-            @RequestParam String regUser
+            @RequestBody Board board
     ) {
-//        Board board = new Board();
-//        board.setTitle("test");
-        Board board = new Board();
-        // board 값 set
-        return boardService.createBoard(board);
+        return service.createBoard(board);
     }
 
-    /** update board */
+    /** update board page */
 //    @PostMapping("/boards")
-//    public int post(@RequestBody Long seq) {
-//        //
-//        log.debug("seq: " + seq);
-//        return boardService.createBoard(board);
-//        return
+//    public Board put(@RequestBody Board board) {
+////        //
+////        log.debug("seq: " + seq);
+////        return boardService.createBoard(board);
+////        return
+//        return service.updateBoard(board);
 //    }
+//
+    @DeleteMapping("/boards/{seq}")
+    public String delete(@PathVariable Long seq) {
+        service.deleteBoard(seq);
+        return "redirect:/boards";
+    }
 
 }

@@ -34,7 +34,7 @@ public class BoardService {
     }
 
     /** 업데이트 */
-    public Board UpdateBoard(Board board) {
+    public Board updateBoard(Board board) {
         int result = mapper.update(board);
         return board;
     }
