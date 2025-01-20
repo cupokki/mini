@@ -17,5 +17,5 @@ public interface BoardMapper {
 
     int update(@Param("board") Board board);
 
-    int delete(@Param("board") Long seq);
+    int delete(@Param("seq") Long seq);
 }

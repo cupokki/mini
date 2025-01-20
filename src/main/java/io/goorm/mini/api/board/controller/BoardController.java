@@ -21,7 +21,7 @@ public class BoardController {
     }
 
     /** 인덱스 */
-    @GetMapping("")
+    @GetMapping("/")
     public String index() {
         return "board/index";
     }
@@ -37,32 +37,37 @@ public class BoardController {
     /** 상세보기 */
     @GetMapping("/boards/{seq}")
     public String view(
-            @PathVariable Long seq,
+            @PathVariable(name ="seq") Long seq,
             Model model){
         Board board = service.getBoardById(seq);
         model.addAttribute("post", board);
         return "board/view";
     }
+    /** 생성 페이지 */
+    @GetMapping("/boards/create")
+    public String create() {
+        return "board/create";
+    }
 
     /** 생성 */
     @PostMapping("/boards")
     public String create(@ModelAttribute Board board, Model model) {
-        var result = service.createBoard(board);
-//        model.addAttribute("", result);
-//        return "board/create";
-        return "redirect:/board/create";
+        service.createBoard(board);
+        return "redirect:/board/boards";
     }
 
     /** 수정 페이지*/
     @GetMapping("/boards/update/{seq}")
-    public String update(@PathVariable Long seq, Model model) {
+    public String update(@PathVariable(name ="seq") Long seq, Model model) {
         model.addAttribute("post", service.getBoardById(seq));
-        return "board/update";
+        return "board/edit";
     }
 
+    /** 수정 리디렉션*/
     @PutMapping("/boards")
-    public String put(@RequestBody Board board, Model model) {
+    public String put(@RequestBody Board board) {
         service.updateBoard(board);
+//        return "redirect:/board/boards/" + board.getSeq();
         return "redirect:/list";
     }
 

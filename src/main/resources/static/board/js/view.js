@@ -1,6 +1,6 @@
 function deletePost(seq) {
     // 사용자 확인
-    if (confirm('정말 삭제하시겠습니까?1')) {
+    if (confirm('정말 삭제하시겠습니까?')) {
         fetch(`/api/boards/${seq}`, {
             method: 'DELETE',
             headers: {

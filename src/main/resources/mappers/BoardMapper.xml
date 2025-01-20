@@ -10,7 +10,7 @@
         ORDER BY seq desc
     </select>
 
-    <select id="selectById" parameterType="Long" resultType="io.goorm.mini.board.model.Board">
+    <select id="selectById" parameterType="long" resultType="io.goorm.mini.board.model.Board">
         SELECT * FROM board
         WHERE seq = #{seq}
     </select>

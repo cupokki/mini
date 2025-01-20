@@ -40,26 +40,22 @@ public class BoardRestController {
 
     /** create board */
     @PostMapping("/boards")
-    public int post(
-            @RequestBody Board board
-    ) {
+    public int post(@RequestBody Board board) {
         return service.createBoard(board);
     }
 
     /** update board page */
-//    @PostMapping("/boards")
-//    public Board put(@RequestBody Board board) {
-////        //
-////        log.debug("seq: " + seq);
-////        return boardService.createBoard(board);
-////        return
-//        return service.updateBoard(board);
-//    }
-//
-    @DeleteMapping("/boards/{seq}")
-    public String delete(@PathVariable Long seq) {
-        service.deleteBoard(seq);
-        return "redirect:/boards";
+    @PutMapping("/boards")
+    public Board put(@RequestBody Board board) {
+//        //
+//        log.debug("seq: " + seq);
+//        return boardService.createBoard(board);
+//        return
+        return service.updateBoard(board);
     }
 
+    @DeleteMapping("/boards/{seq}")
+    public boolean delete(@PathVariable("seq") Long seq) {
+        return service.deleteBoard(seq);
+    }
 }
